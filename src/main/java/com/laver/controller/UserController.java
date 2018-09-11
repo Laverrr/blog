@@ -3,7 +3,6 @@ package com.laver.controller;
 import com.laver.domain.User;
 import com.laver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,16 +25,16 @@ public class UserController {
         List<User> users = userRepository.findAll();
         model.addAttribute("users",users);
         model.addAttribute("title","用户管理");
-        return new ModelAndView("users/list","userModel",model);
+        return new ModelAndView("users/list","model",model);
     }
 
     @GetMapping("/{id}")
-    public ModelAndView list(Model model,@PathVariable Long id){
+    public ModelAndView list(Model model, @PathVariable Long id){
         Optional<User> userOptional = userRepository.findById(id);
         User user = userOptional.get();
         model.addAttribute("user",user);
         model.addAttribute("title","查看用户");
-        return new ModelAndView("users/view","userModel",model);
+        return new ModelAndView("users/view","model",model);
     }
 
     @GetMapping("/form")
@@ -43,12 +42,26 @@ public class UserController {
         User user = new User();
         model.addAttribute("user",user);
         model.addAttribute("title","创建用户");
-        return new ModelAndView("users/form","userModel",model);
+        return new ModelAndView("users/form","model",model);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(Model model,@PathVariable Long id){
+        userRepository.deleteById(id);
+        return new ModelAndView("redirect:/user/users");
+    }
+
+    @GetMapping("/modify/{id}")
+    public ModelAndView modify(Model model,@PathVariable Long id){
+        User user = userRepository.getOne(id);
+        model.addAttribute("user",user);
+        model.addAttribute("title","修改用户");
+        return new ModelAndView("users/form","model",model);
     }
 
     @PostMapping
     public ModelAndView saveOrUpdate(User user){
         userRepository.save(user);
-        return new ModelAndView("redirect:/users");
+        return new ModelAndView("redirect:/user/users");
     }
 }

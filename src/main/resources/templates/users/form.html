@@ -6,6 +6,16 @@
     <title>Title</title>
 </head>
 <body>
-
+<div th:replace="~{fragments/header :: header}"></div>
+<h3 th:text="${model.title}"></h3>
+<form action="/user/" th:action="@{/user}" method="post" th:object="${model.user}">
+    <input type="hidden" name="id" th:value="*{id}">
+    名称：
+    <input type="text" name="name"th:value="*{name}"><br>
+    邮箱：
+    <input type="text" name="email"th:value="*{email}"><br>
+    <input type="submit" value="提交">
+</form>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
