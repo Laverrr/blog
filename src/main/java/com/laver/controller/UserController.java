@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by L on 2018/9/10.
@@ -30,8 +29,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ModelAndView list(Model model, @PathVariable Long id){
-        Optional<User> userOptional = userRepository.findById(id);
-        User user = userOptional.get();
+        User user = userRepository.getOne(id);
         model.addAttribute("user",user);
         model.addAttribute("title","查看用户");
         return new ModelAndView("users/view","model",model);
