@@ -2,17 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="~{fragments/header :: header}">
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
+<div class="container blog-content-container">
 <h3 th:text="${model.title}"></h3>
 <div>
-    <a href="user/form.html" th:href="@{/user/form}">创建用户</a>
+    <a class="btn btn-default" href="user/form.html" th:href="@{/user/form}">创建用户</a>
 </div>
-<table border="1" >
+<table class="table table-striped">
     <thead>
     <tr>
         <td>ID</td>
@@ -31,6 +29,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </tr>
     </tbody>
 </table>
+</div>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
