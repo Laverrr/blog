@@ -1,0 +1,7 @@
+package com.laver.repository;
+
+import com.laver.domain.Comment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+}

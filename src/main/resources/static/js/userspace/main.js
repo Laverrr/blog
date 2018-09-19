@@ -13,7 +13,7 @@ $(function() {
 	
 	// 获取编辑用户头像的界面
 	$(".blog-content-container").on("click",".blog-edit-avatar", function () { 
-		avatarApi = "/u/"+$(this).attr("userName")+"/avatar";
+		avatarApi = "/space/"+$(this).attr("userName")+"/avatar";
 		$.ajax({ 
 			 url: avatarApi, 
 			 success: function(data){

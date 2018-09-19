@@ -60,7 +60,7 @@ $(function() {
 		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
 		$.ajax({
-		    url: '/u/'+ $(this).attr("userName") + '/blogs/edit',
+		    url: '/space/'+ $(this).attr("userName") + '/blogs/edit',
 		    type: 'POST',
 			contentType: "application/json; charset=utf-8",
 		    data:JSON.stringify({"id":$('#blogId').val(), 

@@ -40,4 +40,9 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 //	testCompile('org.springframework.security:spring-security-test')
+	// https://mvnrepository.com/artifact/es.nitaur.markdown/txtmark
+	compile group: 'es.nitaur.markdown', name: 'txtmark', version: '0.16'
+// https://mvnrepository.com/artifact/com.github.rjeschke/txtmark
+	// https://mvnrepository.com/artifact/com.github.rjeschke/txtmark
+//	compile group: 'com.github.rjeschke', name: 'txtmark', version: '0.13'
 }
