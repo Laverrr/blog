@@ -6,6 +6,9 @@ import com.laver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,7 +18,7 @@ import java.util.List;
  * Created by L on 2018/9/16.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
@@ -23,6 +26,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public User saveOrUpdateUser(User user) {
+        user.setEncodePassword(user.getPassword());
         User save = userRepository.save(user);
         return save;
     }
@@ -54,5 +58,10 @@ public class UserServiceImpl implements UserService{
         name="%"+name+"%";
         Page<User> userPage = userRepository.findByNameLike(name, pageable);
         return userPage;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
     }
 }
