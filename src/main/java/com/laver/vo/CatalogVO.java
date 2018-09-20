@@ -4,7 +4,12 @@ package com.laver.vo;
 import java.io.Serializable;
 
 import com.laver.domain.Catalog;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 public class CatalogVO implements Serializable {
  
 	private static final long serialVersionUID = 1L;
@@ -15,20 +20,5 @@ public class CatalogVO implements Serializable {
 	public CatalogVO() {
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public Catalog getCatalog() {
-		return catalog;
-	}
-
-	public void setCatalog(Catalog catalog) {
-		this.catalog = catalog;
-	}
 
 }

@@ -19,9 +19,9 @@ public class Response {
         this.message = message;
     }
 
-    public Response(boolean success, String message, Object boday) {
+    public Response(boolean success, String message, Object body) {
         this.success = success;
         this.message = message;
-        this.body = boday;
+        this.body = body;
     }
 }
