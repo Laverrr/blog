@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Response {
     private boolean success;
     private String message;
-    private Object boday;
+    private Object body;
 
     public Response(boolean success, String message) {
         this.success = success;
@@ -22,6 +22,6 @@ public class Response {
     public Response(boolean success, String message, Object boday) {
         this.success = success;
         this.message = message;
-        this.boday = boday;
+        this.body = boday;
     }
 }

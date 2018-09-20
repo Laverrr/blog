@@ -55,6 +55,7 @@ public class UserspaceController {
      */
     @PostMapping("/{username}/profile")
     @PreAuthorize("authentication.name.equals(#username)")
+    //不知道为什么 前台传过来的密码已经被加密过
     public String saveProfile(@PathVariable("username") String username,User user) {
         User originalUser = userService.getUserById(user.getId());
         originalUser.setEmail(user.getEmail());
