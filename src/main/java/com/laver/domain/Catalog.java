@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Catalog implements Serializable {
 
     @Id // 主键

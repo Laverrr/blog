@@ -88,10 +88,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setEncodePassword(String password) {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodePwd = encoder.encode(password);
-        this.password = encodePwd;
-    }
-
 }

@@ -7,11 +7,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Comment implements Serializable {
 
     @Id // 主键

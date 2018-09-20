@@ -5,11 +5,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Vote implements Serializable {
 
     @Id // 主键

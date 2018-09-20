@@ -1,11 +1,7 @@
 package com.laver.domain;
 
 import com.github.rjeschke.txtmark.Processor;
-import com.sun.org.apache.xml.internal.resolver.Catalog;
-import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

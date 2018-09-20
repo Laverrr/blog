@@ -5,6 +5,7 @@ import com.laver.domain.User;
 import com.laver.service.AuthorityService;
 import com.laver.service.UserService;
 import com.laver.util.ConstrainViolationExceptionHandler;
+import com.laver.util.EncodePwd;
 import com.laver.vo.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -137,7 +138,7 @@ public class UserController {
         user.setAuthorities(authorities);
 
         if(user.getId() == null) {
-            user.setEncodePassword(user.getPassword()); // 加密密码
+            EncodePwd.getEncodePassword(user.getPassword()); // 加密密码
         }else {
             // 判断密码是否做了变更
             User originalUser = userService.getUserById(user.getId());
@@ -146,7 +147,7 @@ public class UserController {
             String encodePasswd = encoder.encode(user.getPassword());
             boolean isMatch = encoder.matches(rawPassword, encodePasswd);
             if (!isMatch) {
-                user.setEncodePassword(user.getPassword());
+                EncodePwd.getEncodePassword(user.getPassword());
             }else {
                 user.setPassword(user.getPassword());
             }

@@ -3,6 +3,7 @@ package com.laver.service.Impl;
 import com.laver.domain.User;
 import com.laver.repository.UserRepository;
 import com.laver.service.UserService;
+import com.laver.util.EncodePwd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public User saveOrUpdateUser(User user) {
-        user.setEncodePassword(user.getPassword());
+        user.setPassword(EncodePwd.getEncodePassword(user.getPassword()));
         User save = userRepository.save(user);
         return save;
     }
@@ -55,13 +57,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public Page<User> listUsersByNameLike(String name, Pageable pageable) {
-        name="%"+name+"%";
-        Page<User> userPage = userRepository.findByNameLike(name, pageable);
-        return userPage;
+        // 模糊查询
+        name = "%" + name + "%";
+        Page<User> users = userRepository.findByNameLike(name, pageable);
+        return users;
     }
 
+    /**
+     * 重写UserDetailsService的方法
+     * User已经继承了UserDetails接口
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<User> listUsersByUsernames(Collection<String> usernames) {
+        return userRepository.findByUsernameIn(usernames);
     }
 }

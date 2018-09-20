@@ -2,7 +2,9 @@ package com.laver.controller;
 
 import com.laver.domain.User;
 import com.laver.service.UserService;
+import com.laver.util.EncodePwd;
 import com.laver.vo.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,12 +61,11 @@ public class UserspaceController {
         originalUser.setName(user.getName());
 
         // 判断密码是否做了变更
-        String rawPassword = originalUser.getPassword();
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodePasswd = encoder.encode(user.getPassword());
-        boolean isMatch = encoder.matches(rawPassword, encodePasswd);
+        String oldPassword = originalUser.getPassword();
+        String password = user.getPassword();
+        boolean isMatch = StringUtils.equals(oldPassword,password);
         if (!isMatch) {
-            originalUser.setEncodePassword(user.getPassword());
+            originalUser.setPassword(password);
         }
 
         userService.saveOrUpdateUser(originalUser);
