@@ -16,7 +16,9 @@ public interface UserService{
      * @param user
      * @return
      */
-    User saveOrUpdateUser(User user);
+    User saveUser(User user);
+
+    User updateUser(User user);
 
     /**
      * 删除用户

@@ -72,7 +72,7 @@
             </ul>
             <div sec:authorize="isAuthenticated()"  class="row" >
                 <div class="dropdown">
-                    <a class=" dropdown-toggle" href="/u/waylau" th:href="@{'/space/' + ${#authentication.name}}" data-toggle="dropdown"><span sec:authentication="name"></span></a>
+                    <a class=" dropdown-toggle" href="/u/waylau" th:href="@{'/space/' + ${#authentication.name}}" data-toggle="dropdown"><span sec:authentication="name"></span></a>&nbsp;&nbsp;&nbsp;
                     <div class="dropdown-menu" >
                         <a class=" dropdown-item" href="/u/waylau" th:href="@{'/space/' + ${#authentication.name}}">个人主页</a>
                         <a class="dropdown-item" href="/u/waylau/profile" th:href="@{'/space/' + ${#authentication.name}+'/profile'}  " >个人设置</a>

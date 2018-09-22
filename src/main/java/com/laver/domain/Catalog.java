@@ -1,14 +1,19 @@
 package com.laver.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Catalog implements Serializable {
 
     @Id // 主键
@@ -24,7 +29,7 @@ public class Catalog implements Serializable {
     @JoinColumn(name="user_id")
     private User user;
 
-    public Catalog(@NotEmpty(message = "名称不能为空") @Size(min = 2, max = 30) String name, User user) {
+    public Catalog(String name, User user) {
         this.name = name;
         this.user = user;
     }

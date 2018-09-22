@@ -1,9 +1,11 @@
 package com.laver.domain;
 
+
 import com.github.rjeschke.txtmark.Processor;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -17,7 +19,7 @@ import java.util.List;
 public class Blog implements Serializable {
 
     @Id // 主键
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
+    @GeneratedValue(strategy= GenerationType.IDENTITY) // 自增长策略
     private Long id; // 用户的唯一标识
 
     @NotEmpty(message = "标题不能为空")

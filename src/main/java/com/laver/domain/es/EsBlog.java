@@ -12,28 +12,27 @@ import org.springframework.data.elasticsearch.annotations.Field;
 
 /**
  * Blog.
- * 
- * @since 1.0.0 2017年3月5日
  *
+ * @since 1.0.0 2017年3月5日
  */
 @Document(indexName = "blog", type = "blog")
 @XmlRootElement // MediaType 转为 XML
 public class EsBlog implements Serializable {
- 
+
 	private static final long serialVersionUID = 1L;
 
 
 	@Id  // 主键
-	private String id;  
+	private String id;
 	@Field(index = false)
 	private Long blogId; // Blog 的 id
- 
+
 	private String title;
- 
+
 	private String summary;
- 
+
 	private String content;
- 
+
 	@Field(index = false)  // 不做全文检索字段
 	private String username;
 	@Field(index = false)  // 不做全文检索字段
@@ -46,19 +45,19 @@ public class EsBlog implements Serializable {
 	private Integer commentSize = 0;  // 评论量
 	@Field(index = false)  // 不做全文检索字段
 	private Integer voteSize = 0;  // 点赞量
- 
+
 	private String tags;  // 标签
 
-	protected EsBlog() {  // JPA 的规范要求无参构造函数；设为 protected 防止直接使用 
+	protected EsBlog() {  // JPA 的规范要求无参构造函数；设为 protected 防止直接使用
 	}
 
 	public EsBlog(String title, String content) {
 		this.title = title;
 		this.content = content;
 	}
-	
+
 	public EsBlog(Long blogId, String title, String summary, String content, String username, String avatar,Timestamp createTime,
-			Integer readSize,Integer commentSize, Integer voteSize , String tags) {
+				  Integer readSize,Integer commentSize, Integer voteSize , String tags) {
 		this.blogId = blogId;
 		this.title = title;
 		this.summary = summary;
@@ -71,7 +70,7 @@ public class EsBlog implements Serializable {
 		this.voteSize = voteSize;
 		this.tags = tags;
 	}
-	
+
 	public EsBlog(Blog blog){
 		this.blogId = blog.getId();
 		this.title = blog.getTitle();
@@ -85,7 +84,7 @@ public class EsBlog implements Serializable {
 		this.voteSize = blog.getVoteSize();
 		this.tags = blog.getTags();
 	}
- 
+
 	public void update(Blog blog){
 		this.blogId = blog.getId();
 		this.title = blog.getTitle();
@@ -99,8 +98,8 @@ public class EsBlog implements Serializable {
 		this.voteSize = blog.getVoteSize();
 		this.tags = blog.getTags();
 	}
- 
-	
+
+
 	public String getId() {
 		return id;
 	}
@@ -131,7 +130,7 @@ public class EsBlog implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
- 
+
 	public String getSummary() {
 		return summary;
 	}
@@ -139,7 +138,7 @@ public class EsBlog implements Serializable {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
- 
+
 	public Timestamp getCreateTime() {
 		return createTime;
 	}
@@ -197,9 +196,9 @@ public class EsBlog implements Serializable {
 	}
 
 	@Override
-    public String toString() {
-        return String.format(
-                "User[id=%d, title='%s', content='%s']",
-                blogId, title, content);
-    }
+	public String toString() {
+		return String.format(
+				"User[id=%d, title='%s', content='%s']",
+				blogId, title, content);
+	}
 }

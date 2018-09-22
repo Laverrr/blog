@@ -24,7 +24,6 @@ public class AdminController {
     public ModelAndView listUsers(Model model) {
         List<Menu> list = new ArrayList<>();
         list.add(new Menu("用户管理", "/user/users"));
-        list.add(new Menu("角色管理", "/roles"));
         list.add(new Menu("博客管理", "/blog"));
         list.add(new Menu("评论管理", "/commits"));
         model.addAttribute("list", list);

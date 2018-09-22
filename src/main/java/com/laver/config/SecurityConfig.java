@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //暂时开放所有网址的访问权限
-                .antMatchers("/css/**","/js/**","/fonts/**","/index").permitAll()
+                .antMatchers("/css/**","/js/**","/fonts/**","/index","/404").permitAll()
 //                .antMatchers("/css/**","/js/**","/fonts/**","/index").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login").failureUrl("/login-error")
                 .and().rememberMe().key(KEY)
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .and().exceptionHandling().accessDeniedPage("/404");
     }
 
     @Autowired
