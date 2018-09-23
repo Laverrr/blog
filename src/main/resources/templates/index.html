@@ -14,59 +14,34 @@
         <div class="col-md-8">
 
             <!-- Blog Post -->
-            <div class="card mb-4">
-                <div class="card-block">
-                    <h2 class="card-title">
-							<span>
-			                  <a href="/u/waylau" title="waylau">
-			                    <img src="https://waylau.com/images/waylau_181_181.jpg" class="blog-avatar-50"
-                                     alt="waylau">
-			                  </a>
-					        </span>
-                        <a href="/u/waylau/blogs/1" class="card-link" title="waylau">
-                            OAuth 2.0 认证的原理与实践
-                        </a></h2>
-                    <p class="card-text">使用 OAuth 2.0 认证的的好处是显然易见的。你只需要用同一个账号密码，就能在各个网站进行访问，而免去了在每个网站都进行注册的繁琐过程。 本文将介绍
-                        OAuth 2.0 的原理，并基于 Spring Security 和 GitHub 账号，来演示 OAuth 2.0 的认证的过程。</p>
-                    <div class="card-text">
-                        <a href="/u/waylau" class="card-link">waylau</a> 发表于 2017-03-17 <i class="fa fa-eye" aria-hidden="true">210</i>
-                        <i class="fa fa-heart-o" aria-hidden="true">10</i> <i class="fa fa-comment-o"
-                                                                              aria-hidden="true">110</i>
-                    </div>
-                </div>
-            </div>
             <div id="mainContainer">
                 <div id="mainContainerRepleace">
                     <div class="card mb-4" th:each="blog : ${blogList}">
                         <div class="card-block">
                             <h2 class="card-title">
-                                <span>
-				                  <a href="/u/waylau" title="waylau" th:href="'/space/' + ${blog.username}"  th:title="${blog.username}">
+		                 		<span>
+				                  <a href="/space/waylau" title="waylau" th:href="'/space/' + ${blog.username}"  th:title="${blog.username}">
 				                    <img src="/images/avatar-defualt.jpg" th:src="${blog.avatar} == null ? '/images/avatar-defualt.jpg' : ${blog.avatar}"  class="blog-avatar-50">
 				                  </a>
 						        </span>
-                                <a href="/u/waylau/blogs/1" class="card-link" title="waylau"
-                                   th:href="'/space/' + ${blog.user.username} + '/blogs/'+ ${blog.id}"  th:title="${blog.user.username}" th:text="${blog.title}">
+                                <a href="/space/waylau/blogs/1" class="card-link" title="waylau"
+                                   th:href="'/space/' + ${blog.username} + '/blogs/'+ ${blog.blogId}"  th:title="${blog.title}" th:text="${blog.title}">
                                     OAuth 2.0 认证的原理与实践
                                 </a>
                             </h2>
                             <p class="card-text" th:text="${blog.summary}">使用 OAuth 2.0 认证的的好处是显然易见的。你只需要用同一个账号密码，就能在各个网站进行访问，而免去了在每个网站都进行注册的繁琐过程。 本文将介绍
                                 OAuth 2.0 的原理，并基于 Spring Security 和 GitHub 账号，来演示 OAuth 2.0 的认证的过程。</p>
                             <div class="card-text">
-                                <a href="/u/waylau" th:href="'/space/' + ${blog.user.username}" class="card-link" th:text="${blog.user.username}">waylau</a>发表于 [[${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm')}]] <i class="fa fa-eye" aria-hidden="true">[[${blog.readSize}]]</i>
+                                <a href="/space/waylau" th:href="'/space/' + ${blog.username}" class="card-link" th:text="${blog.username}">waylau</a> 发表于 [[${#dates.format(blog.createTime, 'yyyy-MM-dd HH:mm')}]] <i class="fa fa-eye" aria-hidden="true">[[${blog.readSize}]]</i>
                                 <i class="fa fa-heart-o" aria-hidden="true">[[${blog.voteSize}]]</i> <i class="fa fa-comment-o"
                                                                                                         aria-hidden="true">[[${blog.commentSize}]]</i>
                             </div>
                         </div>
                     </div>
 
-                    <!--<div th:replace="~{fragments/page :: page}">...</div>-->
+                    <div th:replace="~{fragments/page :: page}">...</div>
                 </div>
             </div>
-
-
-
-            <!-- Pagination -->
 
         </div>
 
@@ -78,25 +53,9 @@
                     <h5 class="card-header"><i class="fa fa-tags" aria-hidden="true"></i> 热门标签</h5>
                     <div class="card-block">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Web Design</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Jersey</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">JavaScript</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">CSS</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Java</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Freebies</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Web Design</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Jersey</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">JavaScript</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">CSS</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Java</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Freebies</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Web Design</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Jersey</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">JavaScript</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">CSS</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Java</span></a>
-                                <a href="/blogs?tag=1"> <span class="badge badge-default">Freebies</span></a>
+                            <div class="col-lg-12" >
+                                <a th:each="tag, tagStat : ${tags}" th:object="${tag}" href="/blogs?keyword=1" th:href="'/blogs?keyword=' +  *{name}"> <span class="badge"
+                                                                                                                                                             th:classappend="${tagStat.index} eq 0 ? 'badge-danger': (${tagStat.index} eq 1 ? 'badge-warning':(${tagStat.index} eq 2 ? 'badge-info':'badge-default'))"th:text="*{name}">Web Design</span></a>
                             </div>
                         </div>
                     </div>
@@ -108,36 +67,11 @@
                     <div class="card-block">
                         <div class="row">
                             <div class="col-lg-12">
-									<span>
-					                  <a href="/u/waylau" title="waylau">
-					                    <img src="https://waylau.com/images/waylau_181_181.jpg" class="blog-avatar-50"
-                                             alt="waylau">
-					                  </a>
-					                </span>
-                                <span>
-					                  <a href="/u/waylau" title="waylau">
-					                    <img src="https://waylau.com/images/waylau_181_181.jpg" class="blog-avatar-50"
-                                             alt="waylau">
-					                  </a>
-					                </span>
-                                <span>
-					                  <a href="/u/waylau" title="waylau">
-					                    <img src="https://waylau.com/images/waylau_181_181.jpg" class="blog-avatar-50"
-                                             alt="waylau">
-					                  </a>
-					                </span>
-                                <span>
-					                  <a href="/u/waylau" title="waylau">
-					                    <img src="https://waylau.com/images/waylau_181_181.jpg" class="blog-avatar-50"
-                                             alt="waylau">
-					                  </a>
-					                </span>
-                                <span>
-					                  <a href="/u/waylau" title="waylau">
-					                    <img src="https://waylau.com/images/waylau_181_181.jpg" class="blog-avatar-50"
-                                             alt="waylau">
-					                  </a>
-					                </span>
+								<span th:each="user: ${users}" th:object="${user}">
+				                  <a href="/space/waylau" th:href="'/space/' + *{username}" title="waylau" th:title="*{username}">
+				                    <img src="/images/avatar-defualt.jpg" th:src="*{avatar} == null ? '/images/avatar-defualt.jpg' : *{avatar}" class="blog-avatar-50">
+				                  </a>
+				                </span>
                             </div>
                         </div>
                     </div>
@@ -147,22 +81,9 @@
                 <div class="card my-4">
                     <h5 class="card-header"><i class="fa fa-fire" aria-hidden="true"></i> 热门文章</h5>
 
-                    <ul class="list-group">
-                        <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                            Spring Data + Thymeleaf 3 + Bootstrap 4 实现分页器<span class="badge badge-danger badge-pill">11115</span>
-                        </a>
-                        <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                            用大白话聊聊分布式系统<span class="badge badge-warning badge-pill">338</span>
-                        </a>
-                        <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                            用大白话聊聊分布式系统<span class="badge badge-info badge-pill">289</span>
-                        </a>
-                        <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                            使用 Eclipse Checkstyle Plugin<span class="badge badge-default badge-pill">189</span>
-                        </a>
-
-                        <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                            使用 Eclipse Checkstyle Plugin<span class="badge badge-default badge-pill">189</span>
+                    <ul class="list-group" th:each="hotblog , hotblogStat : ${hotest}" th:object="${hotblog}">
+                        <a  th:href="'/space/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item">
+                            [[*{title}]]<span class="badge badge-pill" th:classappend="${hotblogStat.index} eq 0 ? 'badge-danger': (${hotblogStat.index} eq 1 ? 'badge-warning':(${hotblogStat.index} eq 2 ? 'badge-info':'badge-default'))">[[*{readSize}]]</span>
                         </a>
                     </ul>
 
@@ -172,23 +93,10 @@
                 <div class="card my-4">
                     <h5 class="card-header"><i class="fa fa-line-chart" aria-hidden="true"></i> 最新发布</h5>
                     <div class="list-group">
-                        <ul class="list-group">
-                            <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                                Spring Data + Thymeleaf 3 + Bootstrap 4 实现分页器
-                            </a>
-                            <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                                用大白话聊聊分布式系统
-                            </a>
-                            <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                                用大白话聊聊分布式系统>
-                            </a>
-                            <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                                使用 Eclipse Checkstyle Plugin
+                        <ul class="list-group" th:each="newblog : ${newest}" th:object="${newblog}">
+                            <a  th:href="'/space/'+*{username} +'/blogs/'+ *{blogId}" class="list-group-item" th:text="*{title}">
                             </a>
 
-                            <a href="/u/waylau/blogs/1" class="list-group-item" title="waylau">
-                                使用 Eclipse Checkstyle Plugin
-                            </a>
                         </ul>
                     </div>
 
@@ -204,7 +112,10 @@
 
 
 <div th:replace="~{fragments/footer :: footer}">...</div>
-<script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
-<script src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+
+<!-- JavaScript -->
+<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
+
+
 </body>
 </html>

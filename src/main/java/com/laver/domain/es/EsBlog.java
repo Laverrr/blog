@@ -19,9 +19,6 @@ import org.springframework.data.elasticsearch.annotations.Field;
 @XmlRootElement // MediaType 转为 XML
 public class EsBlog implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
-
 	@Id  // 主键
 	private String id;
 	@Field(index = false)

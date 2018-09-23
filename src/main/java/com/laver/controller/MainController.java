@@ -36,9 +36,10 @@ public class MainController  {
         return "redirect:/index";
     }
 
+    //将首页重定向 进行数据初始化
     @GetMapping("/index")
     public String index(){
-        return "index";
+        return "redirect:/blogs";
     }
 
     @GetMapping("/login")

@@ -13,6 +13,7 @@ import com.laver.repository.es.EsBlogRepository;
 import com.laver.service.EsBlogService;
 import com.laver.service.UserService;
 import com.laver.vo.TagVO;
+
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.search.SearchParseException;
@@ -32,12 +33,11 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
-
 /**
  * EsBlog 服务.
- * 
- * @since 1.0.0 2017年4月12日
  *
+ * @since 1.0.0 2017年4月12日
+ * @author <a href="https://waylau.com">Way Lau</a>
  */
 @Service
 public class EsBlogServiceImpl implements EsBlogService {
@@ -47,7 +47,7 @@ public class EsBlogServiceImpl implements EsBlogService {
 	private ElasticsearchTemplate elasticsearchTemplate;
 	@Autowired
 	private UserService userService;
-	
+
 	private static final Pageable TOP_5_PAGEABLE = new PageRequest(0, 5);
 	private static final String EMPTY_KEYWORD = "";
 	/* (non-Javadoc)
@@ -80,13 +80,13 @@ public class EsBlogServiceImpl implements EsBlogService {
 	@Override
 	public Page<EsBlog> listNewestEsBlogs(String keyword, Pageable pageable) throws SearchParseException {
 		Page<EsBlog> pages = null;
-		Sort sort = new Sort(Direction.DESC,"createTime"); 
+		Sort sort = new Sort(Direction.DESC,"createTime");
 		if (pageable.getSort() == null) {
 			pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
 		}
- 
+
 		pages = esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword,keyword,keyword,keyword, pageable);
- 
+
 		return pages;
 	}
 
@@ -95,12 +95,12 @@ public class EsBlogServiceImpl implements EsBlogService {
 	 */
 	@Override
 	public Page<EsBlog> listHotestEsBlogs(String keyword, Pageable pageable) throws SearchParseException{
- 
-		Sort sort = new Sort(Direction.DESC,"readSize","commentSize","voteSize","createTime"); 
+
+		Sort sort = new Sort(Direction.DESC,"readSize","commentSize","voteSize","createTime");
 		if (pageable.getSort() == null) {
 			pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
 		}
- 
+
 		return esBlogRepository.findDistinctEsBlogByTitleContainingOrSummaryContainingOrContentContainingOrTagsContaining(keyword, keyword, keyword, keyword, pageable);
 	}
 
@@ -108,8 +108,8 @@ public class EsBlogServiceImpl implements EsBlogService {
 	public Page<EsBlog> listEsBlogs(Pageable pageable) {
 		return esBlogRepository.findAll(pageable);
 	}
- 
- 
+
+
 	/**
 	 * 最新前5
 	 * @return
@@ -119,7 +119,7 @@ public class EsBlogServiceImpl implements EsBlogService {
 		Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
 		return page.getContent();
 	}
-	
+
 	/**
 	 * 最热前5
 	 * @return
@@ -132,7 +132,7 @@ public class EsBlogServiceImpl implements EsBlogService {
 
 	@Override
 	public List<TagVO> listTop30Tags() {
- 
+
 		List<TagVO> list = new ArrayList<>();
 		// given
 		SearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -148,22 +148,22 @@ public class EsBlogServiceImpl implements EsBlogService {
 				return response.getAggregations();
 			}
 		});
-		
+
 		StringTerms modelTerms =  (StringTerms)aggregations.asMap().get("tags");
-	        
-        Iterator<StringTerms.Bucket> modelBucketIt = modelTerms.getBuckets().iterator();
-        while (modelBucketIt.hasNext()) {
-            Bucket actiontypeBucket = modelBucketIt.next();
- 
-            list.add(new TagVO(actiontypeBucket.getKey().toString(),
-                    actiontypeBucket.getDocCount()));
-        }
+
+		Iterator<StringTerms.Bucket> iterator = modelTerms.getBuckets().iterator();
+		while (iterator.hasNext()) {
+			Bucket actiontypeBucket = iterator.next();
+
+			list.add(new TagVO(actiontypeBucket.getKey().toString(),
+					actiontypeBucket.getDocCount()));
+		}
 		return list;
 	}
-	
+
 	@Override
 	public List<User> listTop12Users() {
- 
+
 		List<String> usernamelist = new ArrayList<>();
 		// given
 		SearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -179,17 +179,17 @@ public class EsBlogServiceImpl implements EsBlogService {
 				return response.getAggregations();
 			}
 		});
-		
+
 		StringTerms modelTerms =  (StringTerms)aggregations.asMap().get("users");
-	        
-        Iterator<StringTerms.Bucket> modelBucketIt = modelTerms.getBuckets().iterator();
-        while (modelBucketIt.hasNext()) {
-            Bucket actiontypeBucket = modelBucketIt.next();
-            String username = actiontypeBucket.getKey().toString();
-            usernamelist.add(username);
-        }
-        List<User> list = userService.listUsersByUsernames(usernamelist);
-        
+
+		Iterator<StringTerms.Bucket> iterator = modelTerms.getBuckets().iterator();
+		while (iterator.hasNext()) {
+			Bucket actiontypeBucket = iterator.next();
+			String username = actiontypeBucket.getKey().toString();
+			usernamelist.add(username);
+		}
+		List<User> list = userService.listUsersByUsernames(usernamelist);
+
 		return list;
 	}
 }
