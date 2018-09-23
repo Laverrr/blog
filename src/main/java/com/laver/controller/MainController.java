@@ -19,8 +19,8 @@ import java.util.List;
  * Created by L on 2018/9/14.
  */
 @Controller
-//继承ErrorController可以自定义错误返回页面
-public class MainController implements ErrorController {
+//继承ErrorController可以自定义错误返回页面 implements ErrorController
+public class MainController  {
 
     //权限ID
     private static final Long ROLE_USER_AUTHORITY_ID = 2L;
@@ -82,14 +82,14 @@ public class MainController implements ErrorController {
         return "404";
     }
 
-    @Override
-    public String getErrorPath() {
-        //返回错误页面的URL
-        return "/error";
-    }
-
-    @RequestMapping("/error")
-    public String errorPage() {
-        return "404";
-    }
+//    @Override
+//    public String getErrorPath() {
+//        //返回错误页面的URL
+//        return "/error";
+//    }
+//
+//    @RequestMapping("/error")
+//    public String errorPage() {
+//        return "404";
+//    }
 }

@@ -25,6 +25,7 @@ public class BlogController {
 
     @Autowired
     private EsBlogService esBlogService;
+
     @GetMapping
     public String listEsBlogs(
             @RequestParam(value="order",required=false,defaultValue="new") String order,

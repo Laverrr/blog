@@ -1,18 +1,17 @@
 package com.laver.repository;
 
+
 import com.laver.domain.Blog;
 import com.laver.domain.Catalog;
 import com.laver.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Created by L on 2018/9/12.
  */
 public interface BlogRepository extends JpaRepository<Blog,Long> {
-//    Page<Blog> findDistinctByTitleContainingOrSummaryContainingOrContentContaining(String title, String summary, String content, Pageable pageable);
 
     /**
      * 根据用户名分页查询用户列表（最新）
