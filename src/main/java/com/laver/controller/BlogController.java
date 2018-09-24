@@ -70,10 +70,10 @@ public class BlogController {
             model.addAttribute("newest", newest);
             List<EsBlog> hotest = esBlogService.listTop5HotestEsBlogs();
             model.addAttribute("hotest", hotest);
-//            List<TagVO> tags = esBlogService.listTop30Tags();
-//            model.addAttribute("tags", tags);
-//            List<User> users = esBlogService.listTop12Users();
-//            model.addAttribute("users", users);
+            List<TagVO> tags = esBlogService.listTop30Tags();
+            model.addAttribute("tags", tags);
+            List<User> users = esBlogService.listTop12Users();
+            model.addAttribute("users", users);
         }
 
         return (async==true?"/index :: #mainContainerRepleace":"/index");

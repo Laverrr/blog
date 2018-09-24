@@ -116,7 +116,7 @@ public class EsBlogServiceImpl implements EsBlogService {
 	 */
 	@Override
 	public List<EsBlog> listTop5NewestEsBlogs() {
-		Page<EsBlog> page = this.listHotestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
+		Page<EsBlog> page = this.listNewestEsBlogs(EMPTY_KEYWORD, TOP_5_PAGEABLE);
 		return page.getContent();
 	}
 
