@@ -30,8 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 分类 控制器.
  * 
- * @since 1.0.0 2017年4月10日
- * @author <a href="https://waylau.com">Way Lau</a> 
  */
 @Controller
 @RequestMapping("/catalogs")

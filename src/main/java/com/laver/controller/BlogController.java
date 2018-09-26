@@ -75,7 +75,7 @@ public class BlogController {
             List<User> users = esBlogService.listTop12Users();
             model.addAttribute("users", users);
         }
-
+        //如果是异步请求则只更新mainContainerRepleace里面的内容，否则访问/index
         return (async==true?"/index :: #mainContainerRepleace":"/index");
     }
 

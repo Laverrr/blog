@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**","/js/**","/fonts/**","/index","/404").permitAll()
 //                .antMatchers("/css/**","/js/**","/fonts/**","/index").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("ADMIN")
                 .and()
                 //通过表单登陆 无需再controller里面写requestMapping 直接通过post方法访问/login即可
                 //在登陆页面的表单中 每个input框的id和name应该还是固定的 必须遵循spring security的规范 此处不确定 但目前看来是这样
