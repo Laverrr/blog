@@ -48,6 +48,8 @@ public class UserController {
         List<User> users = page.getContent();	// 当前所在页面数据列表
         model.addAttribute("page", page);
         model.addAttribute("users", users);
+        //第一次访问 默认不是异步请求 所以直接返回list
+        //当js发送请求设置为异步请求时，只对mainContainerRepleace的内容进行更新
         return new ModelAndView(async==true?"users/list :: #mainContainerRepleace":"users/list", "model", model);
     }
 

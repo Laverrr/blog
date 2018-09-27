@@ -25,7 +25,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)// 自增长策略
     private Long id;
 
     @NotEmpty(message = "姓名不能为空")

@@ -51,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**","/js/**","/fonts/**","/index","/404").permitAll()
 //                .antMatchers("/css/**","/js/**","/fonts/**","/index").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                //若不添加此判断，直接访问/user/users 也可以直接访问用户管理页面！！！
+                //todo 可以尝试不添加此权限控制 直接用postman 通过 delete 传参 测试是否能删除用户数据
                 .antMatchers("/user/**").hasRole("ADMIN")
                 .and()
                 //通过表单登陆 无需再controller里面写requestMapping 直接通过post方法访问/login即可

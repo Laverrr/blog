@@ -4,13 +4,13 @@ import com.laver.domain.Authority;
 import com.laver.domain.User;
 import com.laver.service.AuthorityService;
 import com.laver.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Created by L on 2018/9/14.
  */
+@Slf4j
 @Controller
 //继承ErrorController可以自定义错误返回页面 implements ErrorController
 public class MainController  {
@@ -70,14 +71,21 @@ public class MainController  {
      * @return
      */
     @PostMapping("/register")
-    public String registerUser(User user) {
+    public ModelAndView registerUser(User user, Model model) {
         List<Authority> authorities = new ArrayList<>();
         authorities.add(authorityService.getAuthorityById(ROLE_USER_AUTHORITY_ID));
         user.setAuthorities(authorities);
-        userService.saveUser(user);
-        return "redirect:/login";
+        try {
+            userService.saveUser(user);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.addAttribute("errorMsg",e.getMessage());
+            return new ModelAndView("/register", "model", model);
+        }
+        return new ModelAndView("/login", "model", model);
     }
 
+    //此方法给spring security调用
     @GetMapping("/404")
     public String notFoundPage() {
         return "404";

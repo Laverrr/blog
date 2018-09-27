@@ -30,6 +30,9 @@
 			<div class="form-group col-md-5">
 				<button type="submit" class="btn btn-primary">提交</button>
 			</div>
+			<div class="form-group col-md-5  ">
+				<label class="control-label blog-label-error" th:if="${model?.errorMsg} ne null" >plz check ur username or email address</label>
+			</div>
  
 		</form>
  
