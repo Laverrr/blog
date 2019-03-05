@@ -49,7 +49,7 @@ public class User implements UserDetails {
     @Column(length = 100)
     private String password; // 登录时密码
 
-    @Column(length = 200)
+//    @Column(length = 200)
     private String avatar; // 头像图片地址
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)

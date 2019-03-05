@@ -45,38 +45,24 @@ $(function() {
 	} 
 	
 	// 提交用户头像的图片数据
-	$("#submitEditAvatar").on("click", function () { 
-		var form = $('#avatarformid')[0];  
-	    var formData = new FormData();   //这里连带form里的其他参数也一起提交了,如果不需要提交其他参数可以直接FormData无参数的构造函数
+	$("#submitEditAvatar").on("click", function () {
 	    var base64Codes = $(".cropImg > img").attr("src");
- 	    formData.append("file",convertBase64UrlToBlob(base64Codes));  //append函数的第一个参数是后台获取数据的参数名,和html标签的input的name属性功能相同
-	    
- 	    $.ajax({
-		    url: '/space/img',
-		    cache: false,
-		    data: base64Codes,
-		    processData: false,
-		    contentType: false,
-		    success: function(data){
-		    	
-		    	var avatarUrl = data;
-		    	
-				// 获取 CSRF Token 
+				// 获取 CSRF Token
 				var csrfToken = $("meta[name='_csrf']").attr("content");
 				var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 		    	// 保存头像更改到数据库
 				$.ajax({ 
-					 url: avatarApi, 
+					 url: avatarApi,
 					 type: 'POST',
-					 contentType: "application/json; charset=utf-8",
-					 data: JSON.stringify({"id":Number($("#userId").val()), "avatar":avatarUrl}),
+					 data: {"img":base64Codes}
+					 ,
 					 beforeSend: function(request) {
 		                 request.setRequestHeader(csrfHeader, csrfToken); // 添加  CSRF Token 
 		             },
 					 success: function(data){
 						 if (data.success) {
 							// 成功后，置换头像图片
-							 $(".blog-avatar").attr("src", data.avatarUrl);
+							 $(".blog-avatar").attr("src", base64Codes);
 						 } else {
 							 toastr.error("error!"+data.message);
 						 }
@@ -85,14 +71,6 @@ $(function() {
 				     error : function() {
 				    	 toastr.error("error!");
 				     }
-				 });
-	        },
-		    error : function() {
-		    	 toastr.error("error!");
-		    }
-		})
+				 })
 	});
- 
-
-	 
 });

@@ -1,17 +1,14 @@
 package com.laver.controller;
 
-import com.google.common.collect.Maps;
 import com.laver.domain.Blog;
 import com.laver.domain.Catalog;
 import com.laver.domain.User;
 import com.laver.domain.Vote;
 import com.laver.service.BlogService;
 import com.laver.service.CatalogService;
-import com.laver.service.FileService;
 import com.laver.service.UserService;
 import com.laver.vo.Response;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,14 +23,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
-import java.util.Map;
 
 import com.laver.util.ConstraintViolationExceptionHandler;
 
@@ -57,19 +50,12 @@ public class UserspaceController {
     @Autowired
     private CatalogService catalogService;
 
-    @Autowired
-    private FileService fileService;
-
-    @Value("${file.server.url}")
-    private String fileServerUrl;
-
     @GetMapping("/{username}/profile")
     //判断是否是当前验证用户
     @PreAuthorize("authentication.name.equals(#username)")
     public ModelAndView profile(@PathVariable("username") String username, Model model) {
         User  user = (User)userDetailsService.loadUserByUsername(username);
         model.addAttribute("user", user);
-        model.addAttribute("fileServerUrl",fileServerUrl);
         return new ModelAndView("/userspace/profile", "userModel", model);
     }
 
@@ -115,20 +101,17 @@ public class UserspaceController {
 
     /**
      * 保存头像
-     * 只是把头像url存到数据库，并不涉及头像上传到ftp服务器
+     * 只是把头像以base64格式存到数据库
      * @param username
      * @return
      */
     @PostMapping("/{username}/avatar")
     @PreAuthorize("authentication.name.equals(#username)")
-    public ResponseEntity<Response> saveAvatar(@PathVariable("username") String username, @RequestBody User user) {
-        String avatarUrl = user.getAvatar();
-
-        User originalUser = userService.getUserById(user.getId());
-        originalUser.setAvatar(avatarUrl);
-        userService.saveUser(originalUser);
-
-        return ResponseEntity.ok().body(new Response(true, "处理成功", avatarUrl));
+    public ResponseEntity<Response> saveAvatar(@PathVariable("username") String username, String img) {
+        User  user = (User)userDetailsService.loadUserByUsername(username);
+        user.setAvatar(img);
+        userService.updateUser(user);
+        return ResponseEntity.ok().body(new Response(true, "处理成功"));
     }
 
 
@@ -308,24 +291,4 @@ public class UserspaceController {
         return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
     }
 
-    @RequestMapping("img")
-    @ResponseBody
-    public Map richtextImgUpload( @RequestParam(value = "file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response){
-        Map resultMap = Maps.newHashMap();
-        //全部通过拦截器验证是否登陆以及权限
-        String path = request.getSession().getServletContext().getRealPath("upload");
-        String targetFileName = fileService.upload(file,path);
-        if(StringUtils.isBlank(targetFileName)){
-            resultMap.put("success",false);
-            resultMap.put("msg","上传失败");
-            return resultMap;
-        }
-        //前缀？
-//        String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
-        resultMap.put("success",true);
-        resultMap.put("msg","上传成功");
-//        resultMap.put("file_path",url);
-        response.addHeader("Access-Control-Allow-Headers","X-File-Name");
-        return resultMap;
-    }
 }

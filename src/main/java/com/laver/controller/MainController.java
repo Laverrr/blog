@@ -4,7 +4,9 @@ import com.laver.domain.Authority;
 import com.laver.domain.User;
 import com.laver.service.AuthorityService;
 import com.laver.service.UserService;
+import com.laver.util.ImageBase64Utils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,10 +74,11 @@ public class MainController  {
      * @return
      */
     @PostMapping("/register")
-    public ModelAndView registerUser(User user, Model model) {
+    public ModelAndView registerUser(User user, Model model) throws IOException {
         List<Authority> authorities = new ArrayList<>();
         authorities.add(authorityService.getAuthorityById(ROLE_USER_AUTHORITY_ID));
         user.setAuthorities(authorities);
+        user.setAvatar(ImageBase64Utils.getDefaultIcon());
         try {
             userService.saveUser(user);
         } catch (Exception e) {

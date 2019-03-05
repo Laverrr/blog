@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 /**
  * Blog 服务.
  * 
- * @since 1.0.0 2017年4月7日
  *
  */
 @Service
@@ -27,9 +26,7 @@ public class BlogServiceImpl implements BlogService {
 	@Autowired
 	private EsBlogService esBlogService;
  
-	/* (non-Javadoc)
-	 * @see com.waylau.spring.boot.blog.service.BlogService#saveBlog(com.waylau.spring.boot.blog.domain.Blog)
-	 */
+
 	@Transactional
 	@Override
 	public Blog saveBlog(Blog blog) {
