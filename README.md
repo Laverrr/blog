@@ -7,7 +7,7 @@
 Elasticsearch 使用集群搭建，使用的是默认端口9300。如何搭建ES集群自行百度，不使用集群可以删除集群的配置。
 
 技术总结：
-前端：html css js jQuery thymeleaf | RESTFul架构风格
+前端：thymeleaf | RESTFul架构风格
 
 后台：spring boot , JPA ，spring security
 
