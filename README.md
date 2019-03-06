@@ -22,7 +22,7 @@ Elasticsearch 使用集群搭建，使用的是默认端口9300。如何搭建ES
 后台管理地址 http://localhost:8080/admin
 
 首页展示:
-![首页](https://github.com/Laverrr/blob/master/index.jpg)
+![首页](https://github.com/Laverrr/blog/blob/master/index.jpg)
 
 后台展示:
-![后台](https://github.com/Laverrr/blob/master/admin.jpg)
+![后台](https://github.com/Laverrr/blog/blob/master/admin.jpg)
