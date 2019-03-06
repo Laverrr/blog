@@ -7,8 +7,6 @@ import com.laver.domain.User;
 
 /**
  * Catalog 服务接口.
- * 
- * @since 1.0.0 2017年4月10日
  *
  */
 public interface CatalogService {

@@ -4,8 +4,6 @@ import com.laver.domain.Vote;
 
 /**
  * Vote 服务接口.
- * 
- * @since 1.0.0 2017年4月9日
  *
  */
 public interface VoteService {

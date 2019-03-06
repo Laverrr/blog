@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * Comment 服务.
- * 
- * @since 1.0.0 2017年4月9日
  *
  */
 @Service

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2018-09-22 20:11:56
+Date: 2019-03-05 20:24:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,12 +24,6 @@ CREATE TABLE `authority` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of authority
--- ----------------------------
-INSERT INTO `authority` VALUES ('1', 'ROLE_ADMIN');
-INSERT INTO `authority` VALUES ('2', 'ROLE_USER');
 
 -- ----------------------------
 -- Table structure for blog
@@ -51,11 +45,7 @@ CREATE TABLE `blog` (
   PRIMARY KEY (`id`),
   KEY `FKefps36p8dyf3t7yjmic1v0jcs` (`catalog_id`),
   KEY `FKpxk2jtysqn41oop7lvxcp6dqq` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of blog
--- ----------------------------
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for blog_comment
@@ -69,10 +59,6 @@ CREATE TABLE `blog_comment` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of blog_comment
--- ----------------------------
-
--- ----------------------------
 -- Table structure for blog_vote
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_vote`;
@@ -84,10 +70,6 @@ CREATE TABLE `blog_vote` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of blog_vote
--- ----------------------------
-
--- ----------------------------
 -- Table structure for catalog
 -- ----------------------------
 DROP TABLE IF EXISTS `catalog`;
@@ -97,12 +79,7 @@ CREATE TABLE `catalog` (
   `user_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKk3mprwb52pe5lfv3l2xpmwj8s` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of catalog
--- ----------------------------
-INSERT INTO `catalog` VALUES ('1', 'java', '2');
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for comment
@@ -118,10 +95,6 @@ CREATE TABLE `comment` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of comment
--- ----------------------------
-
--- ----------------------------
 -- Table structure for es_blog
 -- ----------------------------
 DROP TABLE IF EXISTS `es_blog`;
@@ -134,16 +107,12 @@ CREATE TABLE `es_blog` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of es_blog
--- ----------------------------
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `avatar` varchar(200) DEFAULT NULL,
+  `avatar` longtext,
   `email` varchar(50) NOT NULL,
   `name` varchar(20) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -151,13 +120,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ob8kqyqqgmefl0aco34akdtpe` (`email`),
   UNIQUE KEY `UK_sb8bbouer5wak8vyiiy4pf2bx` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1', null, 'admin@foxmail.com', 'admin', '$2a$10$pHL34yya135flzypkkGV/.dvjCBqrO4P0ImQEJMAprjL5DCcnWMuy', 'admin');
-INSERT INTO `user` VALUES ('2', null, 'laverrr@foxmail.com', '蔡子辉', '$2a$10$aJYzwVXMydYgfZLk9x.oZOek2V9mbVCYCFA.ulFg3P4.qUnwDyPsK', 'laverrr');
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user_authority
@@ -171,12 +134,6 @@ CREATE TABLE `user_authority` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user_authority
--- ----------------------------
-INSERT INTO `user_authority` VALUES ('1', '1');
-INSERT INTO `user_authority` VALUES ('2', '1');
-
--- ----------------------------
 -- Table structure for vote
 -- ----------------------------
 DROP TABLE IF EXISTS `vote`;
@@ -186,8 +143,4 @@ CREATE TABLE `vote` (
   `user_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKcsaksoe2iepaj8birrmithwve` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of vote
--- ----------------------------
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;

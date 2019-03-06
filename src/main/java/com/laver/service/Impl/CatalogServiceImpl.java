@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * Catalog 服务.
- * 
- * @since 1.0.0 2017年4月10日
  *
  */
 @Service
