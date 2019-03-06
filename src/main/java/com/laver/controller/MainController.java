@@ -8,10 +8,12 @@ import com.laver.util.ImageBase64Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -24,7 +26,7 @@ import java.util.List;
 @Slf4j
 @Controller
 //继承ErrorController可以自定义错误返回页面 implements ErrorController
-public class MainController  {
+public class MainController implements ErrorController {
 
     //权限ID
     private static final Long ROLE_USER_AUTHORITY_ID = 2L;
@@ -95,14 +97,14 @@ public class MainController  {
         return "404";
     }
 
-//    @Override
-//    public String getErrorPath() {
-//        //返回错误页面的URL
-//        return "/error";
-//    }
-//
-//    @RequestMapping("/error")
-//    public String errorPage() {
-//        return "404";
-//    }
+    @Override
+    public String getErrorPath() {
+        //返回错误页面的URL
+        return "/error";
+    }
+
+    @RequestMapping("/error")
+    public String errorPage() {
+        return "404";
+    }
 }
